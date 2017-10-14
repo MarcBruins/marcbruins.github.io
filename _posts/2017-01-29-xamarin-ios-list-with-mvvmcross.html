@@ -1,0 +1,54 @@
+---
+layout: post
+title: Binding lists with iOS and MvvmCross
+---
+<div class="entry-content">
+		<p>In this part we will bind the list of monkeys created in <a href="http://www.marcbruins.nl/xamarin-android-reyclerview-with-mvvmcross/">my previous blogpost</a> to a tableview for iOS. If you want to skip Android and want to use it only for iOS be sure to have the same core code that we wrote in the previous post. <span id="more-332"></span> The source code is available here: <a href="https://github.com/MarcBruins/MonkeyList">https://github.com/MarcBruins/MonkeyList</a></p>
+<h2>Adding monkeys to iOS</h2>
+<p>To show a list of monkeys for iOS we need todo the following:</p>
+<ol>
+<li>Create a custom cell to display our monkeys</li>
+<li>Create a new View and a NIB called “MonkeysView”</li>
+<li>Add a UITableView to the view and expose the property</li>
+<li>Wire it all up</li>
+</ol>
+<p>In iOS we need to have a way of downloading the image. For Android we used the DowloadCache and the File plugin from MvvmCross. This plugin is also available for iOS and will help us out. Go ahead and add the following nuget  packages to your iOS project:</p>
+<ul>
+<li>MvvmCross.Plugin.DownloadCache (we will use this to download an image and display it)</li>
+<li>MvvmCross.Plugin.File (the downloadcache caches on the file system with the help of this package)</li>
+</ul>
+<h3>Creating a custom cell</h3>
+<p>The first we thing we will do is add a new folder to the root of the project called “Views”.  So go ahead and do that. After that right click the views folder and click “Add new file”. Click “iOS” and select a “Table View Cell”, name it “MonkeyCell”.</p>
+<h4>MonkeysViewCell design</h4>
+<p>Open the “MonkeyCell.xib” and design the cell however you want. 
+	You are free to do as you please as long as you expose the properties that you use so we can bind to them.
+	 My cell looks like this:</p>
+<p>
+	<a href="{{ site.imagepath }}monkeycell-ios-design.png">
+		<img src="{{ site.imagepath }}monkeycell-ios-design.png">
+	</a>
+</p>
+<p>My cell height is 130, we should remember this because we need it later.</p>
+<h4>MonkeysViewCell class</h4>
+<p>Now that we made the design and exposed our properties it’s time to bind them. Bind your items in the cell and make sure that you extend from MvxTableViewCell. We also want to download the image and display it. For this we will use the the DownloadCache and File plugin. The binding is as usual only we will bind our item inside the Action of the “DelayBind” which knows when to bind the items.</p>
+<script src="https://gist.github.com/marcbruins/8d3b81d06daa71a86da027267a33e6ef.js"> </script>
+<p>That’s it for our MonkeyCell!</p>
+<h3>Creating the MonkeysView</h3>
+<p>The first we thing we will do is add a new folder to the root of the project called “Views”.  So go ahead and do that. After that right click the views folder and click “Add new file”. Click “iOS” and select a ViewController, name it “MonkeysView”.</p>
+<h4>MonkeysView design</h4>
+<p>We now should have a “MonkeysView.cs” with a “MonkeysView.designer.cs” and a “MonkeysView.xib”. Open the MonkeysView.xib and add a UITableView with the left/top/right/bottom constraints set to 0 so that it fills the whole parent view.</p>
+<p>After that expose the property UITableView so that we can acces it in our “MonkeysView”.</p>
+<p>
+	<a href="{{ site.imagepath }}monkeyview-ios-design.png">
+			<img src="{{ site.imagepath }}monkeyview-ios-design.png">
+	</a>
+</p>
+<h4>MonkeysView class</h4>
+<p>Now that we can access the UITableView we can bind our list of monkeys to the tableview source. In this post we will only use 1 type of cell, therefore we can use the MvxSimpleTableViewSource. If you have multiple types of cells you can extend the “MvxTableViewSource” <a href="https://github.com/MvvmCross/MvvmCross/wiki/Tables-and-Cells-in-iOS">and make your own implementation.</a> We will create a bindingset that binds our “MvxTableViewSource” to the “MvxObseravableCollection” in our ViewModel and set that as the source of our own “MonkeyTableView”. We should also set the 130 height of our cell here.</p>
+<script src="https://gist.github.com/marcbruins/c310a9e5e13a7539d824162045333434.js"> </script>
+<p>That’s it, were done! If you run the application you should have a list of monkeys! If you have questions or you see a mistake that must be fixed, feel free to add a comment. </p>
+<p>
+	<a href="{{ site.imagepath }}monkeylist-ios-final-design.png">
+		<img src="{{ site.imagepath }}monkeylist-ios-final-design.png">
+	</a>
+</p>
