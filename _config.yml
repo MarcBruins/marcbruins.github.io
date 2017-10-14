@@ -8,7 +8,7 @@ permalink:        pretty
 # Setup
 title:            Marc Bruins
 tagline:          'Blogging about mobile development with Xamarin with MvvmCross'
-description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog, create courses for Pluralsight and am a Developer Advocate. I speak at events, contribute to OSS, and I train technology thought leaders'
+description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog and am a Xamarin & Microsoft MVP. I work as a Xamarin Enterprise Consultant, speak at conferences, and contribute to OSS'
 url:              http://hyde.getpoole.com
 baseurl:          /
 imagepath:        /public/img/

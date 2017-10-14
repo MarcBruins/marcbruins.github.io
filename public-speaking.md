@@ -3,28 +3,12 @@ layout: page
 title: Public speaking
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+Public speaking is a thing i love to do. You will reguraly find me at conferences, events and meetups usually talking about mobile development. I'm also a licensed trainer for [Xamarin University](https://university.xamarin.com/team) where i teach all about Xamarin development.
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+## Presentation style
+A huge amount of effort goes into all my talks and I continue to refine my approach over time, often writing about what resonates. The talks that I find the most fulfilling and receive the best feedback are those that blend education with entertainment; They must have substance, but they must also keep people engaged.
+I usually blend visual presentations with live demos and frequently involve the audience in activities, be that having them contribute feedback during the talk, connect to rogue wireless networks or join me on stage. My talks are very carefully prepared and rehearsed yet also remain as ad-libbed as possible; they must feel organic and natural, never stilted or forced.
 
-There are currently two themes built on Poole:
+## Speaking at your event
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
-
-Learn more and contribute on [GitHub](https://github.com/poole).
-
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+Are you looking for a speaker? Feel free to contact [me on Twitter](https://twitter.com/marcbruins) or send an email to marc (at) marcbruins.nl

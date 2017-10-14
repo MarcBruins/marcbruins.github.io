@@ -2,29 +2,9 @@
 layout: page
 title: About
 ---
+Hi, I am Marc Bruins. I'm a Xamarin and Microsoft MVP specialized in mobile technologies. You can often find me speaking and [training](https://university.xamarin.com/team) at various conferences and events. 
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+A great passion of mine is open source. It is really rewarding work if you do something for the community and i believe more companies and people should get involved. I've created several libraries and i'm active for the [MvvmCross](https://www.mvvmcross.com) project.
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+Feel free to contact [me on Twitter](https://twitter.com/marcbruins) or send an email to marc (at) marcbruins.nl
 
-There are currently two themes built on Poole:
-
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
-
-Learn more and contribute on [GitHub](https://github.com/poole).
-
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
