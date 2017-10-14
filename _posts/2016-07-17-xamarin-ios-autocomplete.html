@@ -1,0 +1,34 @@
+---
+layout: post
+title: Autocomplete for Xamarin iOS
+---
+<p>Do you have a UITextField on which you want to add some autocomplete magic? Then you’re in luck, i’ve made an autocomplete UITextfield for Xamarin iOS. <span id="more-255"></span></p>
+<p>The library is not an out of the box solution that looks perfectly on everything. It has some default behaviour which you can use to setup an autocomplete field really quick if that is what you want.&nbsp;But the nice thing about this library is that it is <span style="text-decoration: underline;"><strong>completely customizable</strong></span>.</p>
+<!--more-->
+<h2>Quickstart</h2>
+<ol>
+<li>Add the package to your project.</li>
+<li>In the interface builder select the textfield that you want to have autocomplete functionality and bind it to the viewcontroller(In Xamarin studio, VS or Interface builder)</li>
+<li>Change the class &nbsp;to “MBAutoCompleteTextField”</li>
+<li>Call the setup method in the <strong>ViewDidAppear</strong></li>
+<li>Done!</li>
+</ol>
+<h2>Customize behaviour and appearance</h2>
+<p>MBAutocomplete functionality consists of three&nbsp;steps that it uses to bring you the results, these step are completely customizable:</p>
+<ol>
+<li>It has to fetch data from&nbsp;a source when a new character has been inserted</li>
+<li>The fetched data needs to be sorted using an algorithm(or it has already been sorted)</li>
+<li>The results of the sorted data needs to be displayed</li>
+</ol>
+<h3>1. Fetching data</h3>
+<p>All these steps are replaceable in MBAutoComplete by implementing the interfaces and settings the property of the MBAutoComplete UITextField. The simplest way to display data is to pass in a Collection of strings:</p>
+<script src="https://gist.github.com/MarcBruins/d3ecb84246c147b9bebba01f706b4ddf.js"></script>
+<p>When you have a more advanced use case you can create a class and implement the IDataFetcher interface. Set that class as the datafetcher for your UITextField and you’re done. For example: if you want to fetch some strings from a webserver you could do something like this.</p>
+<script src="https://gist.github.com/MarcBruins/521db57517e3737858dcb9d8a8343bed.js"></script>
+<h3>2. Sorting data</h3>
+<p>Sorting the strings is done by using an algorithm. On default there is no algorithm set. This is convenient for users who fetch data from a webserver that are already sorted. Nevertheless there are some use cases in which you still want to sort the data. You can do that by implementing the ISortingAlghorithm interface and setting the SortingAlgorithm property of the MBAutoCompleteTextField. For example:</p>
+<script src="https://gist.github.com/MarcBruins/87bb3d6a141bdd78c00ce93eef44685d.js"></script>
+<h3>3. Displaying the results</h3>
+<p>The results will be displayed in rows inside a TableView that positions itself underneath the textfield. If you want to customize you can can set your own AutoCompleteViewSource and use custom cells and style it in any way you wish. For example:</p>
+<script src="https://gist.github.com/MarcBruins/dacb8a6c99c774e8234836e302176440.js"></script>
+<p>The source is hosted on github (<a href="https://github.com/MarcBruins/MBAutoComplete" target="_blank">https://github.com/MarcBruins/MBAutoComplete</a>) and it’s also available as a nuget package (<a href="https://www.nuget.org/packages/MBAutoComplete/" target="_blank">https://www.nuget.org/packages/MBAutoComplete/</a>).&nbsp;Feel free to send pull requests!</p>

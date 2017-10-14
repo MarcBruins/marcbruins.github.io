@@ -1,0 +1,69 @@
+---
+layout: post
+title: Binding lists with Android and MvvmCross
+---
+
+<p>Recently i gave a Xamarin/MvvmCross training for one of our clients. During this training there was an assignment on which we would use MvxRecyclerView to display a list of items that we took from a webserver. There where however some issues, in this blogpost i would like to clear up on how to bind a list of items for Android an iOS.</p>
+<!--more-->
+<p>In <b>Part 1 we will target Android and <a href="http://www.marcbruins.nl/ios-tableview-with-mvvmcross/">part 2 will target iOS</a></b>. The same core project will be used throughout these blogposts. The source code is available here:&nbsp;<a href="https://github.com/MarcBruins/MonkeyList/">https://github.com/MarcBruins/MonkeyList/</a></p>
+<h2>Prequisities</h2>
+<p>Before we start we need to&nbsp;setup a&nbsp;MvvmCross solution with a Core project and an Android/iOS project. If you don’t know how, then check out out this video by <a href="http://jonathanroux.com/2016/05/05/your-first-project-with-xamarin-and-mvvmcross-4/">Jonathan&nbsp;Roux</a>. The first two minutes will show you exactly how you should start. Also make sure you have MvvmCross 4.4.0 or higher. There is also a textual explanation available <a href="http://jonathanroux.com/2016/05/05/your-first-project-with-xamarin-and-mvvmcross-4/">here</a></p>
+<span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" src="https://www.youtube.com/embed/NihmK6R9r4s?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border: 0px; display: block; margin: 0px; width: 660px; height: 402px;" data-ratio="0.6090909090909091" data-width="660" data-height="402"></iframe></span>
+<h2>Lets build the app!</h2>
+<p>Now that we are setup we are ready to go. We are going to create an MvvmCross app that shows a list of monkeys(what a surprise)! In order to do that we need the following:</p>
+<ol>
+<li>Create a new ViewModel called “MonkeysViewModel”</li>
+<li>The MonkeysViewModel should have a bindable list(MvxObservableCollection)</li>
+<li>Create an Android view with a MvxRecyclerView with templates to display the monkeys</li>
+<li>Create an iOS view with a TableView to display the monkeys</li>
+</ol>
+<h3>The Core project</h3>
+<p>The MonkeysViewModel will be a really simple ViewModel. Real life scenarios would probably be different but the principles are the same. We will add a new model called Monkey and a MvxObservableCollection on which the views will be able to bind.</p>
+<h4>Create a new Model called “Monkey”</h4>
+<p>Create a new “Models” folder in the Core solution if you don’t already have one and create a new class called “Monkey” with the following properties:</p>
+<script src="https://gist.github.com/MarcBruins/beb96f6b239374fc1fce53593153565c.js"> </script>
+<h4>Create a new ViewModel called “MonkeysViewModel”</h4>
+<p>Right click your ViewModels folder in the Core solution and create a new class called “MonkeysViewModel”. Let it extend MvxViewModel. Also create a MvxObservableCollection property named “Monkeys” which has a generic value of “Monkey”. Now you will be able to add some monkeys!</p>
+<p>Your ViewModel should be something like this:</p>
+<script src="https://gist.github.com/MarcBruins/155fba896fbc9c36d62d8fa6ec425411.js"></script>
+<p>Also make sure that your AppStart points to the “MonkeyViewModel”.</p>
+<h3>The Android project</h3>
+<p>In the Android project we will add a new view called “MonkeyView” and bind it to the ViewModel. In the layout we will add a MvxRecyclerView and bind that to the MvxObservableCollection. The MvxRecyclerview will take a template that will display our monkey data!</p>
+<h4>Setup</h4>
+<p>Before we start we need to add some nuget packages to make this work. We want to use the MvxRecyclerview and thus we have to add it to the project.</p>
+<p>Add the following packages to your Droid project:</p>
+<ul>
+<li>MvvmCross.Droid.Support.V7.RecyclerView</li>
+<li>Xamarin.Android.Support.v7.CardView (yes we are using cardview!)</li>
+<li>MvvmCross.Plugin.DownloadCache (we will use this to download an image and display it)</li>
+<li>MvvmCross.Plugin.File (the downloadcache caches on the file system with the help of this package)</li>
+</ul>
+<p>*Note that you should accept the sub-packages as wel.</p>
+<h4>Add the MonkeyView</h4>
+<p>Right click on your views folder and a new Activity called “MonkeyView”:</p>
+<p><b>MonkeyView.cs</b></p>
+<script src="https://gist.github.com/MarcBruins/4acafd91a278909c4aae089b136cb457.js"></script>
+<p>With this activity is of course a corresponding layout that we need to create. We will add the MvxRecylerView to this layout so that we can bind our ObservableCollection to it:</p>
+<p><b>MonkeysView.axml</b></p>
+<script src="https://gist.github.com/MarcBruins/078ba10cf7834b07cea4be1f8966975c.js"></script>
+<p>Some important things to point out are the <b>MvxItemTemplate</b> and the <b>MvxBind</b>.<br>
+The MvxItemTemplate will bind every item in the ObservableCollection to the layout that is selected in here. Note that we still need to add this layout(that’s the next step). The MvxBind will bind our ObservableCollection called “Monkeys” as its itemsource. By doing this we don’t have to write our own adapter because MvvmCross already took care of it!</p>
+<h5>Multiple templates</h5>
+<p>In some cases you might want to be different templates. That is entirely possible with MvvmCross and its TemplateSelector. More information on how to use this can be found <a href="http://smstuebe.de/2016/06/12/mvvmcross-recycler-templates/">on this great blog post.</a></p>
+<h4>Create a template</h4>
+<p>With the MonkeyView created the only thing that we still need to do is to create a template. Fortunately that is very easy to do because it’s only a layout file. In this blogpost i will create a layout file which uses a cardview to display the data:</p>
+<p><b>listitem_monkey.axml</b></p>
+<script src="https://gist.github.com/MarcBruins/40f77296ba53e8f5565f9407631e0f77.js"></script>
+<p>A few things to point out here are:</p>
+<ul>
+<li>The MvxImageView takes care of the Image and will download it and caches it</li>
+<li>In this template layout we bind to the properties of the type that is defined in the MvxObserableCollection in our case it’s the Monkey class</li>
+</ul>
+<p>We are done for android! Go on an build the project to your phone/emulator. Tada you should have a beautiful list of monkeys:</p>
+<a href="{{ site.imagepath }}monkeylist-android-final.png">
+    <img src="{{ site.imagepath }}monkeylist-android-final.png">
+</a>
+<h2>Optimisation tip!</h2>
+<p>The MvxRecyclerView is loaded by using reflection. Reflection is not the fasted there is. If we want to make it easier for ourself and make the MvxRecyclerView faster we can load the assembly manually in the setup.cs:</p>
+<script src="https://gist.github.com/MarcBruins/25a31516a2589a1d8b3e98438d52af02.js"></script>
+<p>To use this we simple replace the <b>MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView</b> with <b>MvxRecyclerView</b>. </p>

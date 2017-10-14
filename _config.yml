@@ -8,17 +8,18 @@ permalink:        pretty
 # Setup
 title:            Marc Bruins
 tagline:          'Blogging about mobile development with Xamarin with MvvmCross'
-description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog, create courses for Pluralsight and 
-am a Developer Advocate. I speak at events, contribute to OSS, and I train technology thought leaders'
+description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog, create courses for Pluralsight and am a Developer Advocate. I speak at events, contribute to OSS, and I train technology thought leaders'
 url:              http://hyde.getpoole.com
 baseurl:          /
 imagepath:        /public/img/
+excerpt_separator: '<!--more-->'
+permalink: /:title
 
 author:
   name:           'Marc Bruins'
   url:            https://twitter.com/MarcBruins
 
-paginate:         5
+paginate:         3
 
 # Custom vars
 version:          2.1.0
@@ -27,4 +28,4 @@ github:
   repo:           https://github.com/poole/hyde
 
 # Custom plugins
-plugins: [jekyll-paginate,pygments.rb]
+plugins: [jekyll-paginate,pygments.rb,jekyll-feed]
