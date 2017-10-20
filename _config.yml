@@ -9,10 +9,10 @@ permalink:        pretty
 title:            Marc Bruins
 tagline:          'Blogging about mobile development with Xamarin with MvvmCross'
 description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog and am a Xamarin & Microsoft MVP. I work as a Xamarin Enterprise Consultant, speak at conferences, and contribute to OSS'
-baseurl:          ''
+baseurl:          /
 imagepath:        /public/img/
 excerpt_separator: '<!--more-->'
-permalink: /:title
+permalink:        /:title
 
 author:
   name:           'Marc Bruins'
