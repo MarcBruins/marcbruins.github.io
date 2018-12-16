@@ -7,8 +7,8 @@ permalink:        pretty
 
 # Setup
 title:            Marc Bruins
-tagline:          'Blogging about mobile development with Xamarin with MvvmCross'
-description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog and am a Xamarin & Microsoft MVP. I work as a Xamarin Enterprise Consultant, speak at conferences, and contribute to OSS'
+tagline:          'Blogging about all things .NET'
+description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I author this blog and am a Xamarin & Microsoft MVP. I work as a Software architect, speak at conferences, and contribute to OSS'
 baseurl:          /
 imagepath:        /public/img/
 excerpt_separator: '<!--more-->'
