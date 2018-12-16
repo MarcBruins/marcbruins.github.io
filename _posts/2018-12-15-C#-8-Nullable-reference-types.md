@@ -23,17 +23,17 @@ The whole ecosystem including all the libraries that we all use will eventually 
 ## Enabling
 As this is a breaking change we need to enable it. Add the following to your `csproj` or maybe even better to your `Directory.build.props`:
 
-` XML
-    <LangVersion>8</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NullableReferenceTypes>true</NullableReferenceTypes>
-`
+``` XML
+<LangVersion>8</LangVersion>
+<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+<NullableReferenceTypes>true</NullableReferenceTypes>
+```
 
 Also make sure your that all your also projects target *.NET Core 3.0 or higher.*
 
 Welcome to **.NET Hardcore**
 
-![.NET Hardcore](../public/img/DotnetHardcode.PNG)
+![.NET Hardcore](../public/img/DotnetHardcore.PNG)
 
 
 # Errors
