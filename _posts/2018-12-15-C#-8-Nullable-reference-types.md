@@ -3,13 +3,14 @@
 C# 8.0 will introduce a new groundbreaking feature called `Nullable reference types`, this feature will change the way we currently develop our software in C# by making, you guessed it, reference types nullable. 
 
 This guide serves as a practical introduction to the problem and how you should solve those problems.
+ <!-- more -->
 
 ## Why should we use it?
 There are multiple benefits in using this feature. The first and foremost is type safety for reference types. In the end it is very weird that we can assign a value to a reference type that is not of that type. For example: 
 
-` C#
+``` C#
 string helloNull = null; 
-`
+```
 
 Will cause a compiler butt kick! Because `null` is not a string! 
 
@@ -102,6 +103,11 @@ To fix it, either decide to make your parameter nullable or to make it explicit:
 <script src="https://gist.github.com/MarcBruins/208a523748c51d904cc95f19f16197a2.js"></script>
 
 
+# Conclusion
+
+While doing this work a lot of your codebase while change and errors will bubble up to the real problem you got to fix. This mostly means deciding if something should be null or not. When that is done your codebase quality is improved and the intent will be much clearer. 
+
+Nullable reference types seem like a great way forward and i can't wait till everbody is using this feature to make our ecosystem so much better.
 
 
 
