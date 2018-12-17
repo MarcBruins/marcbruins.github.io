@@ -1,5 +1,3 @@
-# C# 8 Nullable reference types updating guide
-
 C# 8.0 will introduce a new groundbreaking feature called `Nullable reference types`, this feature will change the way we currently develop our software in C# by making, you guessed it, reference types nullable. 
 
 This guide serves as a practical introduction to the problem and how you should solve those problems.
