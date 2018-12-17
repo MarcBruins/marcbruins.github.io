@@ -3,7 +3,7 @@
 C# 8.0 will introduce a new groundbreaking feature called `Nullable reference types`, this feature will change the way we currently develop our software in C# by making, you guessed it, reference types nullable. 
 
 This guide serves as a practical introduction to the problem and how you should solve those problems.
- <!-- more -->
+<!--more-->
 
 ## Why should we use it?
 There are multiple benefits in using this feature. The first and foremost is type safety for reference types. In the end it is very weird that we can assign a value to a reference type that is not of that type. For example: 
