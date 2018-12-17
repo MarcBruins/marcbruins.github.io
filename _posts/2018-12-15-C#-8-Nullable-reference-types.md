@@ -32,7 +32,7 @@ As this is a breaking change we need to enable it. Add the following to your `cs
 <NullableReferenceTypes>true</NullableReferenceTypes>
 ```
 
-Also make sure your that all your also projects target *.NET Core 3.0 or higher.*
+Also make sure your that all your projects target *.NET Core 3.0 or higher.*
 
 Welcome to **.NET Hardcore**
 
