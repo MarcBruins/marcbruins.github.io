@@ -14,11 +14,11 @@ There are multiple benefits in using this feature. The first and foremost is typ
 string helloNull = null; 
 ```
 
-Will cause a compiler butt kick! Because `null` is not a string! 
+Will cause a compiler butt kick, because `null` is not a string! 
 
-The second benefit is that it will make the `intent` of your code very clear. It tells you and the users of your solution how your code should be used and handled. In the blink of an eye you'll see what this code should do, and if your are doing it wrong the compiler will give you a kick in the butt.
+The second benefit is that it will make the `intent` of your code very clear. It tells you and the users of your solution how your code should be used and handled. In the blink of an eye you'll see what this code should do, and if your are doing it wrong the compiler tell you.
 
-The whole ecosystem including all the libraries that we all use will eventually be safer to use because they generate no null reference error and the intent of the libraries is much more clear!
+The whole ecosystem including all the libraries that we all use will eventually be safer to use because they generate no null reference error and the intent of the libraries is also much more clear!
 
 *If you are still not convinved that null is a bad idea, then the creator of the `billion dollar mistake` also know as `null` has [publicly apolizeged for introducing it](https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions).* 
 
