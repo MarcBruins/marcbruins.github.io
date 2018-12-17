@@ -52,7 +52,7 @@ When we give a method a nullable parameter often we mean that this parameter is 
 
 The error we would now run into is:
 
-<span style="color:red">*CS8625 Cannot convert null literal to non-nullable reference or unconstrained type parameter.*</span> 
+<span style="color:red"><b>*CS8625 Cannot convert null literal to non-nullable reference or unconstrained type parameter.*</b></span> 
 
 To fix this can make *Username* nullable by adding the <b>?</b>. Note that we also have to do this for the property.
 
@@ -68,9 +68,8 @@ When we create properties we often don't think about the consequences and if the
 Which is fine in the old world but it will now generate an error that you are almost definitely our going to encounter:
 
 <span style="color:red">
-<i>CS8618	Non-nullable property 'PropertyName' is uninitialized.</i><br/>
-<i>CS8618 Non-nullable field 'FieldName' is uninitialized.</i>
-</span> 
+<b><i>CS8618	Non-nullable property 'PropertyName' is uninitialized.</i><br/>
+<i>CS8618 Non-nullable field 'FieldName' is uninitialized.</i></b></span> 
 
 To fix these we should decide if this property should be nullable or not. If its nullable we append the <b>?</b> to it:
 
@@ -89,7 +88,7 @@ Sometimes we tend to return null because we didn't do anything with the results:
 
 The error we encounter is: 
 
-<span style="color:red">*CS8603	Possible null reference return.*</span> 
+<span style="color:red"><b>*CS8603	Possible null reference return.*</b></span> 
 
 You could argue that this might be a code smell but to fix it we should always return a initiliazed list or we should change the signature to make it return null:
 
