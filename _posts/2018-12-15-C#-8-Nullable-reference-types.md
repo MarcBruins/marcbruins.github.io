@@ -88,7 +88,7 @@ Sometimes we tend to return null because we didn't do anything with the results:
 
 The error we encounter is: 
 
-<span style="color:red"><b>*CS8603	Possible null reference return.*</b></span> 
+<span style="color:red"><b>*CS8603 Possible null reference return.*</b></span> 
 
 You could argue that this might be a code smell but to fix it we should always return a initiliazed list or we should change the signature to make it return null:
 
@@ -103,6 +103,15 @@ To fix it, either decide to make your parameter nullable or to make it explicit:
 
 <script src="https://gist.github.com/MarcBruins/208a523748c51d904cc95f19f16197a2.js"></script>
 
+
+## Possible dereference of a null reference
+This is the hardest one i found so far, and i didn't fully understand it yet. An example of where i encountered this error is:
+
+<script src="https://gist.github.com/MarcBruins/97c61543ffdf6a470a795307b99245ff.js"></script>
+
+<span style="color:red"><b>*CS8602 Possible dereference of a null reference.*</b></span> 
+
+Note that the list is nullable, so to fix this we should check if the list is `!= null`. What is really going on is that the compiler is warning us that the reference value may be mutated to null. 
 
 # Conclusion
 
