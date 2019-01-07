@@ -3,24 +3,19 @@ layout: post
 title: Storing secrets safely with Azure Keyvault and Managed Identities
 ---
 
-Imagine that your are building an application with a team and you are using `Azure`. You are using one of these resources to develop your application in: **Azure VM's, Virtual Machine Scale Sets, Azure App Service and Azure Container Instances.**
+Imagine that your are building an application and you are using `Azure`. You are using one of these resources to develop your application in: **Azure VM's, Virtual Machine Scale Sets, Azure App Service and Azure Container Instances.**
 
-You have some secrets in your application and you don't want to expose them in your source. One of the secrets you might have is a connection string that point to a Azure database, typically it's located in our `app.config`:
+You have some secrets in your application and you don't want to expose them in your source. One of the secrets you might for example have is a password for your database: 
 
-``` json
-"ConnectionString": "Password=mysupersecretpassword"
+``` C#
+private string DbPassword = "MySuperSecretPassword";
 ```
-  *Password is only a part of a full connection string, i've left out the rest to only highlight what's important.*
 
 Obviously we don't want this. This is a serious security risk which gives access to our database. To tackle this problem we are going to use [Azure key vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview). It allows us to safely store and retrieve secrets. This way we have no more secrets lying around and we are safe again. 
 
-What we actually want a placeholder that is replaced runtime by our secret. Something like:
+What we actually want is to fill in this value at runtime. So we don't specify any secrets in our code. If we need them we get them from a secure location that can be trusted.
 
-``` json
-"ConnectionString": "Password=sqlAzure--AdminPassword"
-```
-
-To do this we are going to use azure key vault and give the correct access policies to our desired managed identity that belongs to our azure resource.
+<!--more-->
 
 ## Prerequisities
 We are now going to setup a key vault and connect your Azure Resource to the key vault. Note that i'm not writing a full guide on how to setup key vault or any other Azure resources here. Instead i'll link to some excellent guides that help you set it up. We start with the managed identity so that we can use it later when we setup the key vault.
@@ -98,7 +93,7 @@ This message tells us that we still forgot a step. We've granted our application
   *If it already works then it means your are logged in with the correct identity through the az-login command and that that identity has access policies in the keyvault. If you continue this way it means that every developer needs a identity with access policies to the key vault which could be a hassle. If you don't want that, and/or you want to know the alternatives read on..*
 
 ### Granting our local machine a trusted identity
-In order to develop locally there is only one step that remains. We need to grant our local machine a identity that is trusted by the key vault. **There are two ways we can do this.**. One is adding your own identity and log in locally with that identity. The other one is faking that you are the trusted application.
+In order to develop locally there is only one step that remains. We need to grant our local machine a identity that is trusted by the key vault. **There are two ways we can do this**. One is adding your own identity and log in locally with that identity. The other one is faking that you are the trusted application.
 
 
 #### Add your own identity and give it access policies
@@ -130,17 +125,18 @@ You can find your AppId in the `identity` tab on your Azure Resource, you can se
 
 Once set we can also get our secrets as if we where the application itself! 
 
-The benefits of this approach are that you don't have to managed different user in your access policies. Another benefit is that if you run a container locally, you can use your host machine enviroment variable to connect to the key vault. Perfect in a containerd world!
+The benefits of this approach are that you don't have to manage different user in your access policies. Another benefit is that if you run a container locally, you can use your host machine enviroment variable to connect to the key vault. Perfect in a containerizd world!
 
-### Getting out the secrets from the config file
-Now that we can communicate locally and remote with our key vault it's time to remove the code we placed above and read it from our `appsettings.json`.
+*If it doesn't work try rebooting, we've added a value to our path that might require a restart* 
 
-``` json
-//remove the above C# code, we are going to parse it from our json file
-"ConnectionString": "Password=sqlAzure--AdminPassword"
-```
+### Conclusion
+Configuring key vault took us a bit of effort. We've added a managed identity, created a key vault and got the secrets out of the key vault. 
 
+We've also seen the differences between a user assigned identity and and a system assigned identity. And hopefully you know what to choose when now.
 
+Another decision that needs to be made is how to run your application locally. This again depends on your solution and what your application looks like. 
+
+By completing these steps and talking about the different options we've succesfully created a secure enviroment in which our secrets can reside. There is no need for secrets in your source anymore!
 
 
 
