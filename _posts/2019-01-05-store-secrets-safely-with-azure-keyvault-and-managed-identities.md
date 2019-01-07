@@ -14,7 +14,7 @@ Obviously we don't want this. This is a serious security risk which gives access
 <!--more-->
 
 ## Prerequisities
-First off we need to setup a key vault and connect our Azure Resource to the key vault. Note that i'm not writing a full guide on how to setup key vault or any other Azure resources here. Instead i'll link to some excellent guides that help you set it up. We start with the managed identity for our existing resource and then we move on to the key vault.
+First of we need to setup a key vault and connect our Azure Resource to the key vault. Note that i'm not writing a full guide on how to setup key vault or any other Azure resources here. Instead i'll link to some excellent guides that help you set it up. We start with the managed identity for our existing resource and then we move on to the key vault.
 
 ### Enable Managed Identity
 To give our application access rights to the key vault we are going to enable it to have a `managed identity`. A managed identity is a automatically created identity in `azure active directory`, we don't have to worry about active directory or creating an identity ourselves this is all done automatically, in other words, it's *managed*.
