@@ -7,9 +7,7 @@ Imagine that your are building an application and you are using `Azure`. You are
 
 You have some secrets in your application and you don't want to expose them in your source. One of the secrets you might for example have is a password for your database: 
 
-``` C#
-private string DbPassword = "MySuperSecretPassword";
-```
+<script src="https://gist.github.com/MarcBruins/351a7506a9f20718f258b2e33ca9b0ab.js"></script>
 
 Obviously we don't want this. This is a serious security risk which gives access to our database. To tackle this problem we are going to use [Azure key vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview). It allows us to safely store and retrieve secrets at runtime. This way we have no more secrets lying around and we are safe again. 
 
@@ -64,27 +62,22 @@ Now that we have a running key vault let's create a secret, to do this we go to 
 ## Accessing our key vault
 All the infrastructure is in place now and we should be able to connect to the key vault. Install the following packages inside your application to communicatie with the keyvault:
 
-```
+<pre>
+<b>
 Install Package Microsoft.Azure.KeyVault 
 Install Package Microsoft.Azure.Services.AppAuthentication
-```
+</b>
+</pre>
 
 Now let's see if we can get our secret out of the key vault, place the following code inside your application(for example in the startup of your application)
 
-``` C#
-var azureServiceTokenProvider = new AzureServiceTokenProvider();
-var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-var secret = await keyVaultClient.GetSecretAsync("https://YOURKEYVAULT.azure.net/secrets/sqlAzure--AdminPassword").ConfigureAwait(false);
+<script src="https://gist.github.com/MarcBruins/d2f1b9bc4cee2e3bf21e909b946a493f.js"></script>
 
-```
 We would expect to see an error with the following message:
 
 <span style="color:red">
 <i>
 Exception Message: Access token could not be acquired. AADSTS700016: Application with identifier 'XXX' was not found in the directory 'XXX'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant
-Trace ID: 0590fd44-ca30-4ce7-8cba-a778dd8b3400
-Correlation ID: 808cf398-6d06-4c06-803a-2f8d4d5d0bb0
-Timestamp: 2019-01-06 11:43:59Z
 </i>
 </span>
 
