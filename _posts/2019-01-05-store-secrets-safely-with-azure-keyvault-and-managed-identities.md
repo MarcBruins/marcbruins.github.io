@@ -11,19 +11,19 @@ You have some secrets in your application and you don't want to expose them in y
 private string DbPassword = "MySuperSecretPassword";
 ```
 
-Obviously we don't want this. This is a serious security risk which gives access to our database. To tackle this problem we are going to use [Azure key vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview). It allows us to safely store and retrieve secrets. This way we have no more secrets lying around and we are safe again. 
-
-What we actually want is to fill in this value at runtime. So we don't specify any secrets in our code. If we need them we get them from a secure location that can be trusted.
+Obviously we don't want this. This is a serious security risk which gives access to our database. To tackle this problem we are going to use [Azure key vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview). It allows us to safely store and retrieve secrets at runtime. This way we have no more secrets lying around and we are safe again. 
 
 <!--more-->
 
 ## Prerequisities
-We are now going to setup a key vault and connect your Azure Resource to the key vault. Note that i'm not writing a full guide on how to setup key vault or any other Azure resources here. Instead i'll link to some excellent guides that help you set it up. We start with the managed identity so that we can use it later when we setup the key vault.
+First off we need to setup a key vault and connect our Azure Resource to the key vault. Note that i'm not writing a full guide on how to setup key vault or any other Azure resources here. Instead i'll link to some excellent guides that help you set it up. We start with the managed identity for our existing resource and then we move on to the key vault.
 
 ### Enable Managed Identity
 To give our application access rights to the key vault we are going to enable it to have a `managed identity`. A managed identity is a automatically created identity in `azure active directory`, we don't have to worry about active directory or creating an identity ourselves this is all done automatically, in other words, it's *managed*.
 
-Managed identity exists for **Azure VM's, Virtual Machine Scale Sets, Azure App Service, Logic apps, Azure Data Factory V2, Azure API Management and Azure Container Instances.** It depends on your azure resource where this option lives, a quick search should give you the correct results.
+Managed identity exists for **Azure VM's, Virtual Machine Scale Sets, Azure App Service, Logic apps, Azure Data Factory V2, Azure API Management and Azure Container Instances.** It depends on your azure resource where this option lives in the azure portal, a quick search or a look inside you resource in the portal should give you a tab named `identity`.
+
+![Managed system assigned app service identity](../public/img/system-assigned-identity-app-service.PNG)
 
 Once you find it you'll notice that there are two types of Managed identities: **System assigned identity and User assigned identity.**
 
@@ -34,13 +34,11 @@ This managed identity is assigned to the resource(system) itself. The identity i
 These are standalone resources by themselves. Therefore they do not rely upon the lifecycle of any other resource. **We can use the exact same user assigned identity across different resources.** 
 
 ### What is best?
-That depends, you should choose what is best for you. If you have multiple VM's and don't want a lot of GUIDs showing up in your access policies then choose user assigned. 
+That depends, you should choose what is best for you. If you have multiple VM's they would each fill in a slot when you choose a System assigned identity. The key vault allows 20 resources max, so for VM's it's better to choose a User assigned identity. 
 
 If you only have one instance then easy and best solution would be a system assigned identity.
 
 For our example we use a app service with a managed system assigned identity.
-
-![Managed system assigned app service identity](../public/img/system-assigned-identity-app-service.PNG)
 
 ### Setup key vault
 First decide what is the right approach for you. Maybe you want to create the key vault through the portal or another option might be that you use a ARM template to create it. Whatever you choose [the steps are documented.](https://docs.microsoft.com/en-us/azure/key-vault/) When you've done that, you should have a running key vault instance.
@@ -56,7 +54,7 @@ After that we should see it appear in our access policies list.
 
 ![access policy listed](../public/img/access-policy-listed.PNG)
 
-Now we hit **save** to finish this step.That's it for setting it up. Now our application is allowed to consume secrets given by the key vault!
+Now we hit **save** to finish this step. That's it for setting it up. Now our application is allowed to consume secrets given by the key vault!
 
 ## Creating a secret
 Now that we have a running key vault let's create a secret, to do this we go to our keyvault and click on `Secrets`, next click `Generate/Import`. This should give use a screen in which we can create a *new secret*. We give this new secret a name that shows the purpose of it and we use a convention(`usedFor--Description` that shows it a keyvault secret. We call it **sqlAzure--AdminPassword** and set the value to a strong password, ideally a generated one, leave the optional fields as is and hit **Create**.
@@ -81,12 +79,14 @@ var secret = await keyVaultClient.GetSecretAsync("https://YOURKEYVAULT.azure.net
 ```
 We would expect to see an error with the following message:
 
-`
+<span style="color:red">
+<i>
 Exception Message: Access token could not be acquired. AADSTS700016: Application with identifier 'XXX' was not found in the directory 'XXX'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant
 Trace ID: 0590fd44-ca30-4ce7-8cba-a778dd8b3400
 Correlation ID: 808cf398-6d06-4c06-803a-2f8d4d5d0bb0
 Timestamp: 2019-01-06 11:43:59Z
-`
+</i>
+</span>
 
 This message tells us that we still forgot a step. We've granted our application an identity that is allowed to communicate with the key vault but we are not that allowed application. We are developing **locally** and our machine isn't allowed to access the key vault! 
 
