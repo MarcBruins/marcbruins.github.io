@@ -105,13 +105,10 @@ The second step is to verify and if needed login with the right user locally.
 
 Run the code again and you should be able to access the secrets!
 
-
 #### Pretend that you are the trusted identity
 The other option that we have it to fake that we are the trusted identity. To do that go to your `enviroment variables` and add the following to your `path`:
 
-```
-AzureServicesAuthConnectionString RunAs=App;AppId=YOURAPPID;TenantId=YOURTENANTID;AppKey=OPTIONALAPPKEY
-```
+<script src="https://gist.github.com/MarcBruins/b8d9ac6daf8978d30d48fb0a618e29e1.js"></script>
 *AzureServicesAuthConnectionString is the key and the rest is the value*
 
 You can find your AppId in the `identity` tab on your Azure Resource, you can see your `TenantId` when you run `az account list`. The AppKey is required if you have use it and you can find it in your `properties` tab on your azure resource.
