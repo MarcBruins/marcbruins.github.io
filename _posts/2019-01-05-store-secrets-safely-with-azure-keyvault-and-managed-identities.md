@@ -109,7 +109,7 @@ Run the code again and you should be able to access the secrets!
 The other option that we have it to fake that we are the trusted identity. To do that go to your `enviroment variables` and add the following to your `path`:
 
 <script src="https://gist.github.com/MarcBruins/b8d9ac6daf8978d30d48fb0a618e29e1.js"></script>
-*AzureServicesAuthConnectionString is the key and the rest is the value*
+<em><small>AzureServicesAuthConnectionString is the key and the rest is the value</em></small>
 
 You can find your AppId in the `identity` tab on your Azure Resource, you can see your `TenantId` when you run `az account list`. The AppKey is required if you have use it and you can find it in your `properties` tab on your azure resource.
 
@@ -117,7 +117,7 @@ Once set we can also get our secrets as if we where the application itself!
 
 The benefits of this approach are that you don't have to manage different user in your access policies. Another benefit is that if you run a container locally, you can use your host machine enviroment variable to connect to the key vault. Perfect in a containerizd world!
 
-*If it doesn't work try rebooting, we've added a value to our path that might require a restart* 
+<em><small>If it doesn't work try rebooting, we've added a value to our path that might require a restart</em><small>
 
 # Conclusion
 Configuring key vault took us a bit of effort. We've added a managed identity, created a key vault and got the secrets out of the key vault. 
