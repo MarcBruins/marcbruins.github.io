@@ -3,7 +3,7 @@ layout: post
 title: Storing secrets safely with Azure Keyvault and Managed Identities
 ---
 
-Imagine that your are building an application and you are using `Azure`. You are using one of these resources to develop your application in: **Azure VM's, Virtual Machine Scale Sets, Azure App Service and Azure Container Instances.**
+Imagine that your are building an application and you are using `Azure`. You are using one of these resources to develop your application in: **Azure VM's, Virtual Machine Scale Sets, Azure App Service or Azure Container Instances.**
 
 You have some secrets in your application and you don't want to expose them in your source. One of the secrets you might for example have is a password for your database: 
 
@@ -40,7 +40,7 @@ If you only have one instance then easy and best solution would be a system assi
 
 For our example we use a app service with a managed system assigned identity.
 
-![Managed system assigned app service identity](../public/img/system-assigned-identity-app-service.png)
+![Managed system assigned app service identity](../public/img/system-assigned-identity-app-service.PNG)
 
 ### Setup key vault
 First decide what is the right approach for you. Maybe you want to create the key vault through the portal or another option might be that you use a ARM template to create it. Whatever you choose [the steps are documented.](https://docs.microsoft.com/en-us/azure/key-vault/) When you've done that, you should have a running key vault instance.
@@ -50,11 +50,11 @@ Now that we have our key vault instance running we can assign the correct access
 
 To do this we navigate to our key vault and go to **access policies** and click **principal**. Search for your identity and select it. Give it `Get` permissions in the `Secret permissions` dropdown and finish the configuration by clicking **ok**.
 
-![Setting access policies in key vault](../public/img/setting-access-policies-in-key-vault.png)
+![Setting access policies in key vault](../public/img/setting-access-policies-in-key-vault.PNG)
 
 After that we should see it appear in our access policies list.
 
-![access policy listed](../public/img/access-policy-listed.png)
+![access policy listed](../public/img/access-policy-listed.PNG)
 
 Now we hit **save** to finish this step.That's it for setting it up. Now our application is allowed to consume secrets given by the key vault!
 
@@ -99,7 +99,7 @@ In order to develop locally there is only one step that remains. We need to gran
 #### Add your own identity and give it access policies
 If your user is not added to the key vault then go ahead and do that. It works the same way as we have seen in *putting it all together* paragraph. It should look something like this:
 
-![Add your own user to the key vault](../public/img/add-own-identity-to-key-vault.png)
+![Add your own user to the key vault](../public/img/add-own-identity-to-key-vault.PNG)
 Make sure you select that your user can *read secrets*. 
 
 The second step is to verify and if needed login with the right user locally. 
