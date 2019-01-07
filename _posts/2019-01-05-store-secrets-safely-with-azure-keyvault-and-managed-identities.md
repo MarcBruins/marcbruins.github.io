@@ -13,10 +13,10 @@ Obviously we don't want this. This is a serious security risk which gives access
 
 <!--more-->
 
-## Prerequisities
+# Prerequisities
 First of we need to setup a key vault and connect our Azure Resource to the key vault. Note that i'm not writing a full guide on how to setup key vault or any other Azure resources here. Instead i'll link to some excellent guides that help you set it up. We start with the managed identity for our existing resource and then we move on to the key vault.
 
-### Enable Managed Identity
+## Enable Managed Identity
 To give our application access rights to the key vault we are going to enable it to have a `managed identity`. A managed identity is a automatically created identity in `azure active directory`, we don't have to worry about active directory or creating an identity ourselves this is all done automatically, in other words, it's *managed*.
 
 Managed identity exists for **Azure VM's, Virtual Machine Scale Sets, Azure App Service, Logic apps, Azure Data Factory V2, Azure API Management and Azure Container Instances.** It depends on your azure resource where this option lives in the azure portal, a quick search or a look inside you resource in the portal should give you a tab named `identity`.
@@ -25,23 +25,23 @@ Managed identity exists for **Azure VM's, Virtual Machine Scale Sets, Azure App 
 
 Once you find it you'll notice that there are two types of Managed identities: **System assigned identity and User assigned identity.**
 
-### System assigned identity
+## System assigned identity
 This managed identity is assigned to the resource(system) itself. The identity is created when the Managed identiy feature is toggled and it dies when the resource that it is assigned to dies.
 
-### User assigned identity
+## User assigned identity
 These are standalone resources by themselves. Therefore they do not rely upon the lifecycle of any other resource. **We can use the exact same user assigned identity across different resources.** 
 
-### What is best?
+## What is best?
 That depends, you should choose what is best for you. If you have multiple VM's they would each fill in a slot when you choose a System assigned identity. The key vault allows 20 resources max, so for VM's it's better to choose a User assigned identity. 
 
 If you only have one instance then easy and best solution would be a system assigned identity.
 
 For our example we use a app service with a managed system assigned identity.
 
-### Setup key vault
+## Setup key vault
 First decide what is the right approach for you. Maybe you want to create the key vault through the portal or another option might be that you use a ARM template to create it. Whatever you choose [the steps are documented.](https://docs.microsoft.com/en-us/azure/key-vault/) When you've done that, you should have a running key vault instance.
 
-### Putting it all together
+## Putting it all together
 Now that we have our key vault instance running we can assign the correct access policies that our freshly created managed identity. 
 
 To do this we navigate to our key vault and go to **access policies** and click **principal**. Search for your identity and select it. Give it `Get` permissions in the `Secret permissions` dropdown and finish the configuration by clicking **ok**.
@@ -54,12 +54,12 @@ After that we should see it appear in our access policies list.
 
 Now we hit **save** to finish this step. That's it for setting it up. Now our application is allowed to consume secrets given by the key vault!
 
-## Creating a secret
+# Creating a secret
 Now that we have a running key vault let's create a secret, to do this we go to our keyvault and click on `Secrets`, next click `Generate/Import`. This should give use a screen in which we can create a *new secret*. We give this new secret a name that shows the purpose of it and we use a convention(`usedFor--Description` that shows it a keyvault secret. We call it **sqlAzure--AdminPassword** and set the value to a strong password, ideally a generated one, leave the optional fields as is and hit **Create**.
 
 ![.Azure keyvault secret](../public/img/creating-a-secret.PNG)
 
-## Accessing our key vault
+# Accessing our key vault
 All the infrastructure is in place now and we should be able to connect to the key vault. Install the following packages inside your application to communicatie with the keyvault:
 
 <pre>
@@ -75,7 +75,7 @@ Now let's see if we can get our secret out of the key vault, place the following
 
 We would expect to see an error with the following message:
 
-<span style="color:red">
+<span style="color:red; font-family:consolas">
 <i>
 Exception Message: Access token could not be acquired. AADSTS700016: Application with identifier 'XXX' was not found in the directory 'XXX'. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant
 </i>
@@ -83,13 +83,13 @@ Exception Message: Access token could not be acquired. AADSTS700016: Application
 
 This message tells us that we still forgot a step. We've granted our application an identity that is allowed to communicate with the key vault but we are not that allowed application. We are developing **locally** and our machine isn't allowed to access the key vault! 
 
-  *If it already works then it means your are logged in with the correct identity through the az-login command and that that identity has access policies in the keyvault. If you continue this way it means that every developer needs a identity with access policies to the key vault which could be a hassle. If you don't want that, and/or you want to know the alternatives read on..*
+  <em><small>If it already works then it means your are logged in with the correct identity through the az-login command and that that identity has access policies in the keyvault. If you continue this way it means that every developer needs a identity with access policies to the key vault which could be a hassle. If you don't want that, and/or you want to know the alternatives read on..</small></em>
 
-### Granting our local machine a trusted identity
+## Granting our local machine a trusted identity
 In order to develop locally there is only one step that remains. We need to grant our local machine a identity that is trusted by the key vault. **There are two ways we can do this**. One is adding your own identity and log in locally with that identity. The other one is faking that you are the trusted application.
 
 
-#### Add your own identity and give it access policies
+### Add your own identity and give it access policies
 If your user is not added to the key vault then go ahead and do that. It works the same way as we have seen in *putting it all together* paragraph. It should look something like this:
 
 ![Add your own user to the key vault](../public/img/add-own-identity-to-key-vault.PNG)
@@ -105,7 +105,7 @@ The second step is to verify and if needed login with the right user locally.
 
 Run the code again and you should be able to access the secrets!
 
-#### Pretend that you are the trusted identity
+### Pretend that you are the trusted identity
 The other option that we have it to fake that we are the trusted identity. To do that go to your `enviroment variables` and add the following to your `path`:
 
 <script src="https://gist.github.com/MarcBruins/b8d9ac6daf8978d30d48fb0a618e29e1.js"></script>
@@ -119,7 +119,7 @@ The benefits of this approach are that you don't have to manage different user i
 
 *If it doesn't work try rebooting, we've added a value to our path that might require a restart* 
 
-### Conclusion
+# Conclusion
 Configuring key vault took us a bit of effort. We've added a managed identity, created a key vault and got the secrets out of the key vault. 
 
 We've also seen the differences between a user assigned identity and and a system assigned identity. And hopefully you know what to choose when now.
