@@ -32,7 +32,7 @@ This managed identity is assigned to the resource(system) itself. The identity i
 These are standalone resources. Therefore they do not rely upon the lifecycle of any other resource. **The benefit is that we can use the exact same user assigned identity across different resources.** 
 
 ## What is best?
-That depends, you should choose what is best for you. If you have multiple VM's they would each fill in a slot when you choose a System assigned identity. The key vault allows 20 resources max, so for VM's it's better to choose a User assigned identity. 
+That depends, you should choose what is best for you. If you have multiple VM's or containers(maybe a kubernetes cluster) they will each fill in a slot when you choose a System assigned identity. The key vault allows 20 resources max, so for VM's it's better to choose a User assigned identity. 
 
 If you only have one instance then easy and best solution would be a system assigned identity.
 
