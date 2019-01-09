@@ -50,7 +50,7 @@ h1,h2,h3,h4,h5,h6{
 
 @media all and (max-width:480px) {
   .xpiritLogo {
-    display: block; margin-left: auto; margin-right: auto; width: 50%;
+    display: block; margin-left: auto; margin-right: auto; width: 30%;
   }
 }
 /*
