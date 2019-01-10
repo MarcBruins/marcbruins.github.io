@@ -19,7 +19,7 @@ Installing it is a simple as `dotnet tool install nukeeper --global`
 </small></em>
 
 # Solution
-As you can see on the NuKeeper website there is a command called `update`. It will update all your Nuget Packages that you target on your *local file system*. It also has a really nice feature in which you can provide a `regex` pattern so that we can specify only the packages that we want updated! So to update our local packages the only thing we have to do is:
+As you can see on the NuKeeper website there is a command called `update`. It will update all your Nuget Packages that you target on your *local file system*. It also has a really nice feature in which you can provide a `regex` pattern so that we can specify only the packages that we want updated! To update our local packages the only thing we have to do run this command in the root of our repository:
 
 `nukeeper update --include ^EventSourcing. --age 0 --maxupdate 50`
 
