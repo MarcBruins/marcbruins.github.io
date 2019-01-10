@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Easy local package updates with NuKeeper update
+title: easy local package updates with NuKeeper update
 ---
 
 Ever get tired of updating `nuget` packages all over the place? I know i was. For a project that i'm currently working on we have a microservices architecture with about four domains. We have our own packages distributed by `azure devops` that are used in all of these domains. The packages are `EventSourcing.Shared`, `EventSourcing.Store`, `EventSourcing.PubSub` and a few more.
