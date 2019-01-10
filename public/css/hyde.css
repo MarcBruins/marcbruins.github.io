@@ -240,8 +240,8 @@ a.sidebar-nav-item:focus {
   color: #268bd2;
 }
 
-h1 a {
-  color: #08234f;
+.theme-base-0d .content h1 a {
+    color: #08234f;
 }
 
 /* Magenta */
