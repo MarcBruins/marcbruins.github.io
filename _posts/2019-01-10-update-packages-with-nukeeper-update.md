@@ -3,7 +3,7 @@ layout: post
 title: Easy package updates with NuKeeper update
 ---
 
-Ever get tired of updating `nuget` packages all over the place? I know i was. For a project that i'm currently working on we have a microservices architecture with about four domains. We have our own packages distributed by `azure devops` that are used in all of these domains. The packages are `EventSourcing.Shared`, `EventSourcing.Store`, `EventSourcing.PubSub` and a few more.
+Ever get tired of updating `nuget` packages all over the place? I know i was. For a project that i'm currently working on we have a microservices architecture with about four domains. We have our own packages distributed by Azure DevOps that are used in all of these domains. The packages are `EventSourcing.Shared`, `EventSourcing.Store`, `EventSourcing.PubSub` and a few more.
 
 Now every time we update the sourcecode of EventSourcing. We are required to open all different solution and update all the packages to the latest version. This is a very tedious and boring task. Fortunately there is a tool out there that can help us do this, hello `NuKeeper`!
 
