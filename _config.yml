@@ -8,7 +8,7 @@ permalink:        pretty
 # Setup
 title:            Marc Bruins
 tagline:          'Blogging about all things .NET'
-description:      'Hi i am <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. I&#39;m a Xamarin & Microsoft MVP & work as a cloud architect, i also speak at conferences, and contribute to opensource'
+description:      'Hi i&#39;m <a href="https://twitter.com/MarcBruins" target="_blank">@MarcBruins</a>. A Xamarin & Microsoft MVP & work as a cloud architect, i also speak at conferences, and contribute to opensource'
 baseurl:          /
 imagepath:        /public/img/
 excerpt_separator: '<!--more-->'
