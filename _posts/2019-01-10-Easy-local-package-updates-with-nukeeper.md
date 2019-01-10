@@ -10,7 +10,6 @@ Now every time we update the sourcecode of EventSourcing. We are required to ope
 <!--more-->
 
 # NuKeeper
-
 [NuKeeper](https://github.com/NuKeeperDotNet/NuKeeper) is a *dotnet tool* that automagically update NuGet packages in all your .NET projects. It is not tied to a specific solution or project file, you can target you current directory and it will work for all your `csproj` or even your `Directory.Build.props` file. 
 
 It has some very powerful commands that you can check out on the [website](https://github.com/NuKeeperDotNet/NuKeeper#commands). I might blog about them later on but for now let's focus on our problem!
